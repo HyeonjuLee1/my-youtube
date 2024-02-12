@@ -3,14 +3,13 @@ import { useYoutubeApi } from "../context/YoutubeApiContext";
 import { useQuery } from "@tanstack/react-query";
 
 export default function ChannelInfo({ id, name }) {
-  console.log("dpgb", id, name);
   const { youtube } = useYoutubeApi();
   const { data: url } = useQuery({
     queryKey: ["channel", id],
     queryFn: () => youtube.channelImageURL(id),
     staleTime: 1000 * 60 * 5,
   });
-  console.log("url", url);
+
   return (
     <div className="flex my-4 mb-8 items-center">
       {url && <img className="w-10 h-10 rounded-full" src={url} alt={name} />}
